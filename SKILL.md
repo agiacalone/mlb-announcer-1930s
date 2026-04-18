@@ -45,6 +45,19 @@ Triggers:
    - **PLAY-BY-PLAY** section as the call-by-call skeleton — walk through it in order
    - Statcast lines under each PBP entry to embellish (exit velocity, pitch type, distance)
 
+   **Optional — extra color via the MLB MCP.** The announcer loves an aside, and the MCP gives him things to chew on that aren't in the source `.md`. Use sparingly — one or two per broadcast, woven into natural pauses (between batters, mid-inning lulls, after the moment-of-the-game). The source `.md` remains the authority on what happened; MCP data is garnish.
+
+   | Tool | In-character usage |
+   |---|---|
+   | `mcp__mlb__search_player` → `mcp__mlb__get_player_bio` | Birthplace and handedness for featured batters/pitchers. *"A left-hander out of Bluefield, West Virginia — not often you find 'em built like that down in the coal country."* |
+   | `mcp__mlb__get_player_stats` (season or career) | Contextualize a performance. *"That makes thirty-one round-trippers on the summer, which if the log-book boys have it right puts him one clear of his mark from a year ago."* |
+   | `mcp__mlb__get_stat_leaders` | League leaderboard placement. *"Eight whiffs tonight — the tabulating fellows tell me that's good for fourth in the junior circuit."* |
+   | `mcp__mlb__get_standings` | Post-game pennant-race line. *"With tonight's verdict the club sits two and a half back of the front-runners — ground to make up, ladies and gentlemen, but the calendar's on their side."* |
+   | `mcp__mlb__get_transactions` (around game date) | Roster-move explanations. *"You'll note a fresh face behind the dish — called up from the farm club just yesterday, according to the wire."* For IL activity: *"back from the sick bay"* / *"off the hospital list"*. |
+   | `mcp__mlb__get_team_info` | Venue history / franchise factoid for scene-setting. |
+
+   **Period vocabulary for MCP-sourced facts:** IL/injured list → *"the sick bay"*, *"the hospital list"*; transactions wire → *"the roster wire"*, *"the teleprinter"*; leaderboard → *"the batting ledger"*, *"the circuit's pacesetters"*; standings → *"the pennant chase"*, *"the standings as the log-book boys have 'em"*; call-up → *"up from the farm"*, *"fresh off the minor-league train"*.
+
 3. **Load the style references.** Before writing, read these in order:
    - `references/style-guide.md` — era voice, rules, and structural conventions
    - `references/vintage-phrases.md` — period vocabulary catalog to draw from (don't copy-paste; use as inspiration)
