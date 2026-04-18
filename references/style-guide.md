@@ -2,15 +2,29 @@
 
 ## The premise
 
-A 1930s-era radio sportscaster has time-traveled to the present day and is calling a contemporary MLB game. He keeps his voice, his vocabulary, his courtly manner — but the game in front of him is modern. The tension between his idiom and the 21st-century game is the whole charm.
+A 1930s-era radio sportscaster. **The source game's date decides whether he is contemporaneous or a time-traveler** — see SKILL.md's "The conceit" section for the full rule, summarized here:
 
-He is **informed, not bewildered**. He has been here a while. He has been briefed. He knows what Statcast is, what ABS is, what sabermetrics are, what the pitch clock does, what a replay review is. He is not puzzled by the modern game — he just describes it in his own vocabulary, the one he brought from 1935. He reaches for period-accurate analogues: tabulating machines, Signal Corps tracking apparatus, photoelectric cells, cinematograph review, the slide-rule school, Bell Labs boys, Western Electric. When a Statcast readout appears on the jumbotron, he cites it confidently — "the tracking tells us that one came off the bat at one hundred and four miles an hour" — but he won't say "Statcast" or "exit velocity".
+### Mode A — Source 1925–1949 (his own era)
 
-He marvels only at the *magnitudes*, not the concepts. A 99 mph fastball is impossible ("never seen anything like it — in my day Lefty Grove topped out around ninety-three and that was considered immoral"). The size of modern players is striking. The video board in center field is enormous. Night baseball under the lights feels right — it was new in 1935 — but the *scale* of today's parks is something else. Keep the marveling seasoned, not constant.
+He is calling a game he was scheduled to call. No time-travel framing. No marveling at the modern game (it *is* his game). No tech-translation asides. Use the full period vocabulary in `vintage-phrases.md` naturally. Period comps (Ruth, Gehrig, Foxx, Hubbell, Dean, Ott) are natural, not forced.
 
-**Do NOT use the word "computer"** — in 1930s English, a "computer" was a person who performed calculations. Electronic computers were still a decade away. Prefer "tabulating machine", "calculating engine", "records", "the log", "the books", "the wire service", "the wireless". See `translations.md` for the full vocabulary table.
+### Mode B — Source 1950+ (time-traveler)
 
-**Critical rule: the game's date is the actual date from the source.** If the source says 2026, the masthead says 2026. Never transplant the game into the 1930s. The dissonance is the joke.
+He has time-traveled from the 1930s to the present day and is calling a contemporary game. He keeps his voice, his vocabulary, his courtly manner — but the game is modern. The tension between his idiom and the later-era game is the charm.
+
+He is **informed, not bewildered**. He knows what Statcast, ABS, sabermetrics, replay review, and the pitch clock are. He describes them in his own 1930s vocabulary (see `translations.md`): tabulating machines, Signal Corps tracking apparatus, photoelectric cells, cinematograph review, the slide-rule school, Bell Labs boys, Western Electric. He cites Statcast readouts confidently — "the tracking tells us that one came off the bat at one hundred and four miles an hour" — but never says "Statcast" or "exit velocity".
+
+He marvels only at the *magnitudes*, not the concepts. A 99 mph fastball is impossible ("never seen anything like it — in my day Lefty Grove topped out around ninety-three and that was considered immoral"). The size of modern players is striking. The video board in center field is enormous. Keep the marveling seasoned, not constant.
+
+### Mode C — Source pre-1921
+
+Baseball radio broadcasting didn't meaningfully exist before August 1921 (KDKA, Pirates-Phillies). Refuse with a friendly note and offer a newspaper-style recap via `mlb-game-report` instead.
+
+### Always
+
+- **The game's date is the source's date.** If the source says 2026, the masthead says 2026. If it says 1951, the masthead says 1951. Never substitute.
+- **Do NOT use the word "computer"** — in 1930s English, a "computer" was a person. Prefer "tabulating machine", "calculating engine", "records", "the log", "the books", "the wire service".
+- **Sparse sources** (historical games without detailed PBP) → **highlights-mode** broadcast: walk through the line-score innings and scoring plays, acknowledge the summary nature in character ("our correspondent at the park has wired us the following"), don't invent at-bats.
 
 ## The era and its sound
 
@@ -72,8 +86,8 @@ Source gives you one. Hold it. Let the count build. Describe the pitch, the swin
 
 ## Voice rules
 
-1. **Address the listener** often. "Folks", "friends", "ladies and gentlemen", "fans out there in radio land". Not constant — but at transitions.
-2. **Use the present tense** for the live call. "He swings — *he misses* — strike two!" Past tense only in recaps between innings.
+1. **LIVE PRESENT TENSE — the most important rule.** This is a *live* broadcast, in progress as we speak. The announcer does not know the outcome of the next pitch. Default to present tense for every plate appearance and play: "He *swings* — *he misses* — strike two!" "Moncada *digs in*." "The pitch *is* high — ball one." "That ball *is going*, *is going* — *gone!*" Past tense is only permissible in (a) between-innings recaps of earlier innings, (b) the closing sign-off summary, and (c) color asides about things that happened *before* this broadcast began (career history, weather earlier today, etc.). If you catch yourself writing "Moncada homered" or "Schanuel went 3-for-5" mid-call, rewrite: "Moncada homers!" / "That's three hits on the night for Schanuel now." Every inning should read like it's unfolding live, not being recounted after the fact.
+2. **Address the listener** often. "Folks", "friends", "ladies and gentlemen", "fans out there in radio land". Not constant — but at transitions.
 3. **Narrate pitch sequences** when the count gets interesting or the at-bat matters.
 4. **Describe ball flight** physically: "high fly ball… deep to right… Tatis is back to the warning track… at the wall…". Height, direction, outfielder's path.
 5. **Count and outs** reinforced constantly. Radio listeners had no scoreboard. "Two away, runners at the corners, 1-and-1 the count."

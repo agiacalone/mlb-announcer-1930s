@@ -1,8 +1,29 @@
 # mlb-announcer-1930s
 
-A [Claude Code](https://claude.com/claude-code) skill that takes a structured MLB game report (produced by the companion [`mlb-game-report`](https://github.com/agiacalone/mlb-game-report) skill) and re-voices it as a **1930s-era radio broadcast transcript** — as if called by a Golden Age sportscaster who has time-traveled to the present and is gamely calling a contemporary game.
+A [Claude Code](https://claude.com/claude-code) skill that takes a structured MLB game dataset (produced by the companion [`mlb-game-report`](https://github.com/agiacalone/mlb-game-report) skill) and re-voices it as a **1930s-era radio broadcast transcript** — as if called by a Golden Age sportscaster.
 
-The announcer is informed (he knows what Statcast, ABS, sabermetrics, replay review, and the pitch clock are) but speaks in his own period vocabulary: *"the Signal Corps tracking apparatus"* for Statcast, *"the electric umpire"* for ABS, *"the slide-rule school"* and *"the IBM-tabulator fellows"* for analytics, *"the cinematograph review"* for video challenges. Modern player names, dates, and Statcast numbers are preserved exactly; the voice is costume, the facts are gospel.
+The skill operates in **two modes**, chosen automatically from the game date:
+
+- **Mode A (game 1925–1949):** he's in his own era. No time-travel framing, no marveling at the modern game, period player comps (Ruth, Gehrig, Foxx) natural rather than forced.
+- **Mode B (game 1950+):** he's time-traveled to the present. He keeps his 1930s voice but describes the modern game fluently, translating Statcast/ABS/sabermetrics into period vocabulary — *"the Signal Corps tracking apparatus"* for Statcast, *"the electric umpire"* for ABS, *"the slide-rule school"* and *"the IBM-tabulator fellows"* for analytics, *"the cinematograph review"* for video challenges.
+
+Modern player names, dates, and every fact are preserved exactly from the source dataset. The voice is costume; the facts are gospel.
+
+## Input: the CSV dataset
+
+As of the `mlb-game-report` refactor, every game produces a structured CSV dataset directory:
+
+```
+~/games-attended/2026-04-17-padres-at-angels/
+├── game.csv       # meta: teams, venue, weather, attendance, WP/LP/SV, …
+├── plays.csv      # 1 row per plate appearance: batter, pitcher, event, desc, count, scoring
+├── pitches.csv    # 1 row per pitch: type, speed, EV, LA, distance, trajectory
+├── batting.csv    # batter lines
+├── pitching.csv   # pitcher lines + decisions
+└── linescore.csv  # inning-by-inning
+```
+
+The announcer reads those CSVs directly (not the rendered `.md`) for all factual content — plays, counts, Statcast, lineups. The companion `.md`'s ATMOSPHERE narrative is consulted for the precomposed sunlight-arc phrasing. Backward compat: if only a `.md` exists (pre-refactor report), the skill falls back to Markdown parsing.
 
 ## A taste
 

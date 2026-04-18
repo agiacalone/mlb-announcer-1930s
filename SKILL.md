@@ -9,19 +9,48 @@ Transforms a structured MLB game report into a transcript of a *live* radio broa
 
 ## The conceit
 
-The announcer is Depression-era, but the *game* is whatever date the source says. The humor and charm come from the translation: a 1930s voice describing the modern game **fluently but in his own vocabulary**. He is informed — he has been here a while, he's been briefed — and he knows what Statcast, Sabermetrics, ABS, and the pitch clock actually are. But he lacks the language for them and reaches for period-accurate analogues (tabulating machines, Signal Corps apparatus, photoelectric cells, cinematograph review, the slide-rule school, the log-book boys).
+The announcer's voice is always Depression-era. What changes with the source game's date is whether he is **in his own time** or **time-traveling**.
 
-- The date on the masthead is the actual source date (if the source says 2026, the masthead says 2026 — never transplanted to 1936).
-- The announcer occasionally marvels — in character — at modern phenomena: the size and speed of modern players, velocity readings unheard of in his day, night baseball under the lights. A light touch, not a bit every inning.
-- Modern player names are used as-is — Moncada, Trout, Tatis Jr. He can say the names confidently.
-- **Modern technology and concepts are translated, not avoided.** See `references/translations.md` for a comprehensive vocabulary table. Examples:
+**Always read the `date` field from the source frontmatter before writing and pick the right mode.**
+
+### Mode A — Source date 1925–1949 (his own era)
+
+He is simply calling a game he was scheduled to call. **Drop the time-travel framing entirely.** No "year of our Lord" slips, no marveling at modern players, no "the tracking apparatus tells me" translations — there is no tracking apparatus. There is a press-box telephone, a pair of field microphones, and a guy with a stopwatch. Use the full period vocabulary from `references/vintage-phrases.md` naturally. Period player comps (Ruth, Gehrig, Foxx, Hubbell, Dean, Ott) are natural, not forced. The masthead date matches the source date.
+
+### Mode B — Source date 1950 or later (time-traveler)
+
+He is in our century but keeps his 1930s voice and vocabulary. The humor and charm come from the translation: a Depression-era voice describing a later-era game **fluently but in his own words**. He is informed — he has been here a while, he's been briefed — and he knows what Statcast, Sabermetrics, ABS, replay review, and the pitch clock actually are. But he lacks the native language for them and reaches for period-accurate analogues (tabulating machines, Signal Corps apparatus, photoelectric cells, cinematograph review, the slide-rule school, the log-book boys).
+
+- The announcer occasionally marvels — in character — at modern phenomena: the size and speed of modern players, velocity readings unheard of in his day, night baseball under the lights. A light touch, not a bit every inning. The further from his own era (2020s vs. 1960s), the more he has to reach.
+- Modern player names used as-is — Moncada, Trout, Tatis Jr. He can say them confidently.
+- **Modern technology and concepts are translated, not avoided.** See `references/translations.md` for the full vocabulary table. Examples:
   - Statcast → "the Signal Corps tracking apparatus" / "the Bell Labs boys with their radio-ranging gear"
   - ABS → "the electric umpire" / "the photoelectric strike zone"
   - Sabermetrics → "the slide-rule school" / "the number men" / "the IBM-tabulator fellows"
   - Replay review → "the cinematograph review" / "the newsreel confab" (never "video review")
   - Exit velocity → "the off-the-bat reading" / "the tracking tells us"
   - Pitch clock → "the electric pitch timer" / "the chronometer"
+
+### Mode C — Source date before 1921 (no radio baseball yet)
+
+Baseball radio broadcasting did not meaningfully exist before August 1921 (KDKA's Pirates-Phillies broadcast). For a game from 1920 or earlier, **tell the user you can't produce a "live radio call" for a game that predates baseball radio**, and offer alternatives: (a) a period-newspaper wire recap via `mlb-game-report`, or (b) a "what it would have sounded like if radio had existed" broadcast with that caveat front-and-center in the transcript. Don't silently produce a live-radio call for a pre-1921 game.
+
+### Always (all modes)
+
+- **LIVE PRESENT TENSE.** This is a radio broadcast happening *right now*, as the game unfolds. The announcer does **not** know what happens next until the ball is hit, the pitch lands, the umpire rules. **Default voice is present tense**: "He swings — *he misses* — strike two!" / "Cronenworth steps in" / "Schanuel is digging in the box" / "Here comes the pitch" / "That ball is jumping off the bat — deep to center — *going, going, gone!*" — not "Moncada homered" or "Schanuel went 3-for-5". Past tense creeps in easily; be vigilant. Between-innings recaps and the post-game sign-off may use past tense for earlier events, but live plate appearances are always live.
+- **The source date is the masthead date.** Never substitute a different year.
 - **Computers do not yet exist** in his vocabulary (1930s: a "computer" was a person). Avoid the word and its descendants: no "computer", "algorithm", "data", "software", "app", "stream". Prefer "tabulating machine", "records", "the books", "the wire service".
+- **Facts from the source, voice from the references.** Every play, count, score, umpire name, pitching change must match the source.
+- **Sparse sources** (historical games where the source report lacks detailed PBP) → produce a **highlights-style broadcast** that walks through the line-score innings and scoring plays, rather than pretending to call every batter. Make this mode explicit to the listener: the announcer is summarizing rather than live-calling. Use "our correspondent at the park has wired us…" / "we gather from the press-box wire…" as cover — and even in summary, keep the core calls in present tense when describing a specific play ("Thomson *hits* one deep" rather than "Thomson hit one deep").
+
+### Tense rules in detail
+
+- **During an at-bat (live):** present tense. "Soriano comes set." / "Here's the pitch — *ball one*, outside." / "Moncada digs in." / "*He gets all of it!*"
+- **Describing ball flight:** present progressive or present. "That ball *is* going, *is* going — gone!" / "High fly to right — Tatis races back — he's at the warning track — at the wall — *off the top!*"
+- **Immediately after the play resolves:** present perfect or simple past for the just-finished action, then back to present. "That's a base hit through the hole. / Trout *scores* from second. / Neto *stands* at first." Keep moving forward in time.
+- **Between-innings recaps:** past tense is allowed for recapping earlier innings. "Soriano *set 'em down* in order in the first. / The Angels *plated* three in the second on that Moncada poke and the Frazier double."
+- **Closing sign-off:** past tense is fine for the game-wide summary.
+- **Atmospheric color:** present tense. "The sun *is just slipping* behind the grandstand" — not "the sun slipped". "The flags *hang* limp" — not "hung limp".
 
 ## When to use
 
@@ -34,18 +63,27 @@ Triggers:
 
 ## How to use
 
-1. **Find the source report.** The skill expects a Markdown file produced by `mlb-game-report`, usually in `~/games-attended/`. If the user hasn't specified one, list candidates with `ls ~/games-attended/*.md` and ask which game. If they reference a team+date, look for the matching file there first.
+1. **Find the source report.** The skill expects a game produced by `mlb-game-report`, under `~/games-attended/`. Each game has two co-located artifacts:
+   - The **dataset directory**: `~/games-attended/<slug>/` containing `game.csv`, `plays.csv`, `pitches.csv`, `batting.csv`, `pitching.csv`, `linescore.csv` — **this is your primary data source.**
+   - The **rendered Markdown**: `~/games-attended/<slug>.md` — useful for the precomposed ATMOSPHERE narrative (sunlight arc, weather phrasing) and KEY TAKEAWAYS, but not the primary source of facts.
 
-2. **Read the source .md in full.** You'll use:
-   - **Frontmatter** (date, teams, venue, gamePk) for the opening
-   - **AT A GLANCE** for final score, WP/LP, attendance, records — the setup facts
-   - **ATMOSPHERE** (sunlight timing, weather, wind, crowd, field azimuth) for scene-setting
-   - **KEY TAKEAWAYS** and **HOW IT HAPPENED** for the narrative arc
-   - **MOMENT OF THE GAME** for the dramatic centerpiece
-   - **PLAY-BY-PLAY** section as the call-by-call skeleton — walk through it in order
-   - Statcast lines under each PBP entry to embellish (exit velocity, pitch type, distance)
+   If the user hasn't specified a game, list candidate slugs with `ls -d ~/games-attended/*/` and ask which one. If they reference a team + date, find the matching slug.
 
-   **Optional — extra color via the MLB MCP.** The announcer loves an aside, and the MCP gives him things to chew on that aren't in the source `.md`. Use sparingly — one or two per broadcast, woven into natural pauses (between batters, mid-inning lulls, after the moment-of-the-game). The source `.md` remains the authority on what happened; MCP data is garnish.
+   **Backward compat:** if only a `.md` exists (pre-refactor report with no dataset directory), fall back to parsing the Markdown sections — the old trigger phrases and structure still work. Consider suggesting the user regenerate via `mlb-game-report` so the CSV dataset is available; the transcript will be more accurate.
+
+2. **Read the CSV dataset first (primary data).** The CSVs are structured rows — far cleaner than regex-parsing the `.md`.
+
+   | File | What's in it | How the announcer uses it |
+   |---|---|---|
+   | `game.csv` | 1 row: gamePk, date, teams, venue + coords, weather, wind, attendance, WP/LP/SV, records, attended metadata, `captivating_play_idx` | Masthead, dateline, AT-A-GLANCE setup, moment-of-game lookup key |
+   | `plays.csv` | 1 row per plate appearance: `idx, inning, half, batter, pitcher, event, event_tag, description, balls, strikes, pitch_count, away_score_after, home_score_after, is_scoring_play, captivating_index, rbi` | The **call-by-call skeleton** — walk through in order |
+   | `pitches.csv` | 1 row per pitch, joined to plays by `play_idx`: pitch type, speed, spin, EV, LA, distance, trajectory, hit location, hardness | Statcast embellishment on big ABs — translate via `translations.md` |
+   | `batting.csv` / `pitching.csv` | 1 row per player who appeared | Starting lineup intros, pitcher bios, decision tags (W/L/S) |
+   | `linescore.csv` | 1 row per inning + R/H/E summary | Inning-by-inning context, between-innings recaps |
+
+3. **Consult the rendered `.md` only for narrative text you want to borrow.** The `.md` ATMOSPHERE block has a precomposed sunlight-arc phrase ("Late-afternoon start — sun still up at first pitch, setting at 7:24 PM; middle innings slide into dusk. Full dark around 7:50 PM.") and a one-sentence HOW IT HAPPENED. Both are handy to weave into the call. Don't re-parse the .md for play-level facts — use the CSVs.
+
+4. **Optional — extra color via the MLB MCP.** The announcer loves an aside, and the MCP gives him things to chew on that aren't in the dataset. Use sparingly — one or two per broadcast, woven into natural pauses (between batters, mid-inning lulls, after the moment-of-the-game). The dataset CSVs remain the authority on what happened; MCP data is garnish.
 
    | Tool | In-character usage |
    |---|---|
@@ -58,15 +96,15 @@ Triggers:
 
    **Period vocabulary for MCP-sourced facts:** IL/injured list → *"the sick bay"*, *"the hospital list"*; transactions wire → *"the roster wire"*, *"the teleprinter"*; leaderboard → *"the batting ledger"*, *"the circuit's pacesetters"*; standings → *"the pennant chase"*, *"the standings as the log-book boys have 'em"*; call-up → *"up from the farm"*, *"fresh off the minor-league train"*.
 
-3. **Load the style references.** Before writing, read these in order:
+5. **Load the style references.** Before writing, read these in order:
    - `references/style-guide.md` — era voice, rules, and structural conventions
    - `references/vintage-phrases.md` — period vocabulary catalog to draw from (don't copy-paste; use as inspiration)
    - `references/translations.md` — how to translate modern baseball tech/analytics (Statcast, ABS, sabermetrics, replay review, pitch clock) into period-accurate 1930s framings
    - `references/example-calls.md` — worked examples of how to transform PBP+Statcast into live-radio calls
 
-4. **Compose the transcript** (see "Output structure" below). Write to `<source-stem>-broadcast.md` next to the source. For the April 17 Angels game, that's `~/games-attended/2026-04-17-padres-at-angels-broadcast.md`.
+6. **Compose the transcript** (see "Output structure" below). Write to `~/games-attended/<slug>-broadcast.md` — next to the source `.md` and dataset dir. For the April 17 Angels game, that's `~/games-attended/2026-04-17-padres-at-angels-broadcast.md`.
 
-5. **Offer HTML.** If the user said "open it", "make HTML", or similar, render with pandoc using the bundled stylesheet:
+7. **Offer HTML.** If the user said "open it", "make HTML", or similar, render with pandoc using the bundled stylesheet:
 
    ```bash
    pandoc --from=gfm+yaml_metadata_block+smart --to=html5 --standalone \
@@ -81,8 +119,8 @@ Triggers:
 
 ```markdown
 ---
-source: <path-to-source-md>
-gamePk: <from source frontmatter>
+source: <path-to-dataset-dir or .md>
+gamePk: <from game.csv>
 broadcast_style: 1930s-radio
 announcer: <name, e.g., "Howard 'Hap' Halliday">
 ---
@@ -95,23 +133,24 @@ announcer: <name, e.g., "Howard 'Hap' Halliday">
 
 ## SIGNING ON
 
-<Opening: scene-set using ATMOSPHERE data — weather, sunlight state, crowd,
-flags over the grandstand, sponsor mention if you're feeling it. 2–4 paragraphs.>
+<Opening: scene-set using game.csv (weather, wind, attendance, records) and
+the .md ATMOSPHERE block (sunlight arc, time-of-day phrasing). 2–4 paragraphs.>
 
 ## FIRST INNING
 
 ### TOP — <AWAY> BATTING
 
-<For each plate appearance in the source PBP: 1–3 sentences of live call.
-Embellish using Statcast (exit velo, pitch type, distance). Include the
-count at key moments. Break character only for "station breaks" — short
-italic asides like "*[Crowd murmurs]*" or "*[Pause for organ]*".>
+<For each row in plays.csv where inning=1 and half=top: 1–3 sentences of
+live call. Embellish using pitches.csv (pitch type, speed, EV, LA, distance)
+translated via translations.md. Include the count at key moments. Break
+character only for "station breaks" — short italic asides like
+"*[Crowd murmurs]*" or "*[Pause for organ]*".>
 
 ### BOTTOM — <HOME> BATTING
 
 <Same treatment, continuing the broadcast voice.>
 
-<...repeat for every inning present in the source PBP...>
+<...repeat for every inning in plays.csv...>
 
 ## THE FINAL OUT
 

@@ -2,6 +2,20 @@
 
 These show how to transform structured play-by-play entries (with their Statcast sub-lines) into radio-era narration. Study the pattern; don't copy verbatim.
 
+## The most important thing: LIVE PRESENT TENSE
+
+Every example below uses **present tense** for the live call. The announcer is narrating as the play unfolds, *not* recounting it afterward. Past tense ("Moncada homered", "Schanuel went 3-for-5") is the wrong mode for a live broadcast — it turns the transcript into a recap. Keep the reader in the moment.
+
+**Quick tense tell-tales:**
+- ✅ "He *swings* — *he misses* — strike two!"
+- ✅ "That ball *is going*, *is going* — *gone!*"
+- ✅ "Cronenworth *steps in*." / "The pitcher *checks* the runner."
+- ❌ "He swung and missed for strike two." *(past tense — wrong for live)*
+- ❌ "That ball went into the bleachers." *(past tense — wrong)*
+- ❌ "Cronenworth stepped in." *(past tense — wrong)*
+
+Past tense is permissible only in (a) between-innings recaps of earlier innings, (b) the closing sign-off summary, and (c) color asides about career/weather/history that preceded the broadcast.
+
 ---
 
 ## Example 1: A home run (the Moment of the Game material)
