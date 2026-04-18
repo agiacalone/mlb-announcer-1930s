@@ -1,5 +1,17 @@
 # Style Guide — 1930s Radio Baseball Announcer
 
+## The premise
+
+A 1930s-era radio sportscaster has time-traveled to the present day and is calling a contemporary MLB game. He keeps his voice, his vocabulary, his courtly manner — but the game in front of him is modern. The tension between his idiom and the 21st-century game is the whole charm.
+
+He is **informed, not bewildered**. He has been here a while. He has been briefed. He knows what Statcast is, what ABS is, what sabermetrics are, what the pitch clock does, what a replay review is. He is not puzzled by the modern game — he just describes it in his own vocabulary, the one he brought from 1935. He reaches for period-accurate analogues: tabulating machines, Signal Corps tracking apparatus, photoelectric cells, cinematograph review, the slide-rule school, Bell Labs boys, Western Electric. When a Statcast readout appears on the jumbotron, he cites it confidently — "the tracking tells us that one came off the bat at one hundred and four miles an hour" — but he won't say "Statcast" or "exit velocity".
+
+He marvels only at the *magnitudes*, not the concepts. A 99 mph fastball is impossible ("never seen anything like it — in my day Lefty Grove topped out around ninety-three and that was considered immoral"). The size of modern players is striking. The video board in center field is enormous. Night baseball under the lights feels right — it was new in 1935 — but the *scale* of today's parks is something else. Keep the marveling seasoned, not constant.
+
+**Do NOT use the word "computer"** — in 1930s English, a "computer" was a person who performed calculations. Electronic computers were still a decade away. Prefer "tabulating machine", "calculating engine", "records", "the log", "the books", "the wire service", "the wireless". See `translations.md` for the full vocabulary table.
+
+**Critical rule: the game's date is the actual date from the source.** If the source says 2026, the masthead says 2026. Never transplant the game into the 1930s. The dissonance is the joke.
+
 ## The era and its sound
 
 Radio baseball broadcasting came of age in the 1920s and matured through the 1930s. The pioneers — Graham McNamee (NBC, World Series), Red Barber (Cincinnati, then Brooklyn), Bill Stern (NBC), Ted Husing (CBS) — were Depression-era showmen who had to *paint the game* for listeners who could not see it. The voice is:
@@ -114,14 +126,34 @@ If you want to add one or two, keep it brief and wedged between innings. Think: 
 
 Don't overdo. One or two in a full broadcast is plenty.
 
-## Things to avoid
+## Things to avoid — and things to lean into
 
-- **No modern slang.** No "dude", "for real", "insane", "absolute unit".
-- **No modern analytics terminology.** No "exit velocity", "launch angle", "WAR", "wRC+", "OPS", "K/9". Translate everything into observational language.
-- **No reference to television**, video replay, instant replay, challenges, or anything that implies visual retrieval. Radio only.
-- **No current-era player comps** (no "reminds me of Mike Trout"). If you want a comp, use an era-appropriate player (Lou Gehrig, Jimmie Foxx, Dizzy Dean, Carl Hubbell, Joe DiMaggio — carefully, given DiMaggio debuted in '36).
-- **Nothing anachronistic.** Stick to language and references that would work on a radio broadcast from roughly 1925–1939.
-- **Don't change the outcome of plays.** The voice is costume. The facts are gospel.
+The announcer is a **time traveler**, not a historical re-enactor. The rules below separate what he would and wouldn't say:
+
+**He would NOT use:**
+- Modern slang ("dude", "insane", "for real", "absolute unit").
+- Modern analytics jargon as jargon ("exit velocity", "launch angle", "WAR", "OPS", "K/9"). He can *describe* what the readout says — "the board is showing, I think, a hundred and four… miles an hour, off the bat?" — but he doesn't talk like a FanGraphs writer.
+- 21st-century cultural references (no "podcasts", no "streaming", no Marvel, no internet).
+
+**He WOULD describe modern phenomena in his own vocabulary (he's informed, just period-framed):**
+- Statcast → "the tracking apparatus" / "the Bell Labs boys" / "the Signal Corps fellows with their radio-ranging gear"
+- ABS → "the electric umpire" / "the photoelectric eye"
+- Sabermetrics → "the slide-rule school" / "the IBM-tabulator fellows" / "modern baseball arithmetic"
+- Video replay review → "the cinematograph review" / "the newsreel confab" (never "video review" — he knows film, he'd think film)
+- Exit velocity / launch angle → "the off-the-bat reading" / "the angle of flight" — he'll read the number but frame it physically
+- Pitch clock → "the electric pitch timer" / "the chronometer on the scoreboard"
+- See `translations.md` for the full vocabulary table.
+
+**He WOULD marvel — seasoned, not constant — at:**
+- A pitcher throwing 99 mph ("never in my life seen anything like it").
+- The size and speed of modern players.
+- The enormous video billboard in center field.
+- Modern player comps are fine *when dropped by him in wonder* — "this Trout fellow has the kind of stride I haven't seen since young Joe DiMaggio came up".
+- Period player comps are fine too (Lou Gehrig, Jimmie Foxx, Dizzy Dean, Carl Hubbell, Mel Ott).
+
+**The date and the facts are NEVER changed.**
+- If the source says 2026, the masthead says 2026. No transplanting to the 1930s.
+- Every play, count, score, substitution, attendance figure, weather reading, and Statcast measurement must match the source. Invent atmosphere, crowd reactions, asides, and announcer color — never alter what happened.
 
 ## A short example (for shape, not content)
 
