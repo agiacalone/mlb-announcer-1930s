@@ -217,7 +217,7 @@ hr {
 .radio-script .team-name.t-DET { --team-color: var(--t-DET); }
 .radio-script .team-name.t-HOU { --team-color: var(--t-HOU); }
 .radio-script .team-name.t-KC  { --team-color: var(--t-KC); }
-.radio-script .team-name.t-LAA { --team-color: var(--t-LAA); }
+.radio-script .team-name.t-LAA, .radio-script .team-name.t-ANA { --team-color: var(--t-LAA); }
 .radio-script .team-name.t-LAD { --team-color: var(--t-LAD); }
 .radio-script .team-name.t-MIA { --team-color: var(--t-MIA); }
 .radio-script .team-name.t-MIL { --team-color: var(--t-MIL); }
