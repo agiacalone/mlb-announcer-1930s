@@ -97,10 +97,11 @@ Triggers:
    **Period vocabulary for MCP-sourced facts:** IL/injured list → *"the sick bay"*, *"the hospital list"*; transactions wire → *"the roster wire"*, *"the teleprinter"*; leaderboard → *"the batting ledger"*, *"the circuit's pacesetters"*; standings → *"the pennant chase"*, *"the standings as the log-book boys have 'em"*; call-up → *"up from the farm"*, *"fresh off the minor-league train"*.
 
 5. **Load the style references.** Before writing, read these in order:
-   - `references/style-guide.md` — era voice, rules, and structural conventions
+   - `references/radio-script-format.md` — **authoritative document shape** (title block, script lines, timestamps, speaker labels, SFX/MUSIC cues, inning dividers). Read this first; it defines the output structure.
+   - `references/style-guide.md` — era voice, rules, and content conventions (live present tense, era-aware conceit, no "computer" words)
    - `references/vintage-phrases.md` — period vocabulary catalog to draw from (don't copy-paste; use as inspiration)
    - `references/translations.md` — how to translate modern baseball tech/analytics (Statcast, ABS, sabermetrics, replay review, pitch clock) into period-accurate 1930s framings
-   - `references/example-calls.md` — worked examples of how to transform PBP+Statcast into live-radio calls
+   - `references/example-calls.md` — worked examples of how to transform PBP+Statcast into script-line calls
 
 6. **Compose the transcript** (see "Output structure" below). Write to `~/games-attended/<slug>-broadcast.md` — next to the source `.md` and dataset dir. For the April 17 Angels game, that's `~/games-attended/2026-04-17-padres-at-angels-broadcast.md`.
 
@@ -113,58 +114,98 @@ Triggers:
           OUT.md -o OUT.html
    ```
 
-   Then inline `scripts/broadcast.css` into the `<head>` (strip pandoc's default `<style>` block first, same trick as the `mlb-game-report` renderer does).
+   Then inline `scripts/broadcast.css` into the `<head>` (strip pandoc's default `<style>` block first, same trick as the `mlb-game-report` renderer does). Also inject `<script src="/nav.js" defer></script>` before `</head>` so the site-wide nav bar appears on the hosted page (styled via the sepia `nav.site-nav` rules in `broadcast.css`).
 
 ## Output structure
 
+**The transcript is formatted as a proper radio script** — every utterance is a labeled script line (`[HH:MM:SS] LABEL: content`) with ALL-CAPS speaker labels, bracketed SFX/MUSIC cues, and inning-break dividers. This replaces the earlier "prose with blockquotes" shape. **Read `references/radio-script-format.md` first — that file is the authoritative spec.**
+
+Short summary of the shape:
+
 ```markdown
 ---
-source: <path-to-dataset-dir or .md>
+source: <path-to-dataset-dir>
 gamePk: <from game.csv>
-broadcast_style: 1930s-radio
-announcer: <name, e.g., "Howard 'Hap' Halliday">
+broadcast_style: 1930s-radio-script
+announcer: Howard "Hap" Halliday
 ---
 
 # THE BROADCAST
-## <AWAY> at <HOME> · <VENUE> · <FULL_DATE>
-### *A live radio call by <ANNOUNCER>, from the press box at <VENUE>*
 
-> **STATION IDENT.** Opening jingle. Organ fanfare.
+<div class="script-header">
 
-## SIGNING ON
+```
+===================================================================
+  PROGRAM:    <Team> Baseball on <station>
+  DATE:       <Day>, <Full Date>
+  GAME:       <Away> at <Home> (<score>, Final)
+  VENUE:      <Venue>, <City>, <State>
+  ANNOUNCER:  Howard "Hap" Halliday
+  DURATION:   <H:MM>
+===================================================================
+```
 
-<Opening: scene-set using game.csv (weather, wind, attendance, records) and
-the .md ATMOSPHERE block (sunlight arc, time-of-day phrasing). 2–4 paragraphs.>
+</div>
 
-## FIRST INNING
+<div class="radio-script">
 
-### TOP — <AWAY> BATTING
+**[00:00:00] MUSIC:** *PROGRAM OPEN — ORGAN FANFARE, FADE UNDER.*
 
-<For each row in plays.csv where inning=1 and half=top: 1–3 sentences of
-live call. Embellish using pitches.csv (pitch type, speed, EV, LA, distance)
-translated via translations.md. Include the count at key moments. Break
-character only for "station breaks" — short italic asides like
-"*[Crowd murmurs]*" or "*[Pause for organ]*".>
+**[00:00:12] HALLIDAY:** Good evening, friends, and welcome to <venue>...
 
-### BOTTOM — <HOME> BATTING
+**[00:02:45] SFX:** *[CROWD MURMUR — FIRST PITCH READY]*
 
-<Same treatment, continuing the broadcast voice.>
-
-<...repeat for every inning in plays.csv...>
-
-## THE FINAL OUT
-
-<Close out: the final play, crowd reaction, final score recap, storyline
-wrap-up, sign-off in character.>
-
-> **SIGN-OFF.** Station ident. Organ fade.
+**[00:02:51] HALLIDAY:** And here we go, folks...
 
 ---
 
-*Broadcast transcript composed from <source-filename>. All facts — plays,
-counts, scores, Statcast measurements — are drawn from the MLB Stats API
-via `mlb-game-report`. The voice and embellishments are period costume.*
+### ▲ TOP 1ST — <AWAY> BATTING · <HOME> PITCHING
+
+**[00:03:15] HALLIDAY:** Cronenworth digs in...
+
+<continues, one script line per beat...>
+
+---
+
+### ▼ BOTTOM 1ST — <HOME> BATTING · <AWAY> PITCHING
+
+<...repeat for every inning in plays.csv...>
+
+---
+
+### THE FINAL OUT
+
+**[02:55:30] HALLIDAY:** (final out call)
+
+**[02:55:40] SFX:** *[CROWD — GAME-ENDING ROAR]*
+
+**[02:56:00] HALLIDAY:** Final score: ...
+
+**[02:57:58] MUSIC:** *PROGRAM CLOSE — ORGAN FANFARE.*
+
+**[02:58:00] STATION ID:** *[KFI LOS ANGELES]*
+
+</div>
+
+---
+
+<!-- Do NOT emit a footer citation with the source path/filename — it leaks
+     internal structure when the HTML is served publicly. Either omit the
+     footer entirely, or use a generic one like "Facts from the MLB Stats
+     API. Voice, SFX, and crowd color are period costume." — but never
+     reveal the local dataset path. -->
+*Facts from the MLB Stats API. Voice, SFX, music, and crowd color are period costume.*
 ```
+
+Key rules (see `radio-script-format.md` for full spec):
+
+- **Every paragraph is a script line** — `**[HH:MM:SS] LABEL:** content`. No free prose paragraphs.
+- **Labels are ALL CAPS + colon**: `HALLIDAY`, `SFX`, `MUSIC`, `STATION ID`, `COMMERCIAL`.
+- **Break to a new line on every speaker change, every major beat** (strike call, ball in flight, scoring play). One paragraph ≈ 5–20 seconds of airtime.
+- **Timestamps** are `[HH:MM:SS]`, linearly distributed across game duration by play index (approximate; we'll swap for real `start_time` values when the CSV schema supports them).
+- **SFX / MUSIC content** goes in italic brackets: `*[CROWD ROARS]*`, `*PROGRAM OPEN — ORGAN FANFARE*`.
+- **Inning dividers** are `---` + `### ▲ TOP 1ST — …` or `### ▼ BOTTOM 1ST — …`.
+- **Everything is wrapped in `<div class="radio-script">`** so the CSS can style it as a typewritten script (monospace, hanging indent, accented labels).
 
 ## Guardrails
 

@@ -18,23 +18,45 @@ Past tense is permissible only in (a) between-innings recaps of earlier innings,
 
 ---
 
+**Format reminder:** every example below follows the **radio-script shape** from `radio-script-format.md` — each script line is a bold `[HH:MM:SS] LABEL:` paragraph. Old prose-with-blockquote examples have been rewritten.
+
+---
+
 ## Example 1: A home run (the Moment of the Game material)
 
-### Source (from the report)
+### Source (from plays.csv + pitches.csv)
 
 ```
-1. **Moncada** (vs. Waldron) — *Home Run.* Yoán Moncada homers (3) on a fly ball to center field. **[Padres 0, Angels 1]**
-    ↳ count 2-1, 4 pitches
-    ↳ Four-Seam Fastball 92.5 mph, 2023 rpm · Batted: EV 104.3 mph, LA 34°, 388 ft, fly ball, to CF
+idx=10 · inning=2 bottom · batter=Moncada · pitcher=Waldron · event=Home Run
+count 2-1 · 4 pitches · Four-Seam 92.5 mph, 2023 rpm
+EV 104.3, LA 34°, 388 ft, fly ball, CF
+[Padres 0, Angels 1]
 ```
 
-### Broadcast
+### Script
 
-> *Stepping in now is Yoán Moncada, the third sacker, batting from the left side. The count works to two-and-one. Waldron — who, folks, has been dancing that knuckleball up there all night — this time goes with the straight stuff. Fastball. Moncada — a short stride — and a* mighty *cut —*
->
-> *Ohhh, he got every bit of it! High fly ball, deep into center! Merrill turns — he's running — he's running — but there's nothing for him to do but watch it go! That ball lands ten rows up in the center-field bleachers! A four-bagger for Moncada, and the Angels have struck first here at Angel Stadium!*
->
-> *Angels 1, Padres nothing, in the bottom of the second. And what a poke that was, ladies and gentlemen — Moncada's third circuit clout of the young season.*
+```
+**[00:21:15] HALLIDAY:** Yoán Moncada digs in, the third sacker,
+batting from the left side. Count runs to two and one.
+
+**[00:21:24] HALLIDAY:** Waldron — who has been dancing that
+knuckleball up there all evening — this time goes with the straight
+stuff. Fastball. Moncada — a short stride — and a *mighty* cut —
+
+**[00:21:33] HALLIDAY:** Oh, he got every bit of it! High drive,
+deep to center! Merrill turns, running back, running back — but
+there is *nothing* to do but watch it go! That ball lands ten rows
+up in the center-field bleachers!
+
+**[00:21:41] SFX:** *[CROWD — ANGEL STADIUM EXPLOSION]*
+
+**[00:21:45] HALLIDAY:** A four-bagger for Moncada — his third
+circuit clout of the young season — and the Angels have struck
+first here at Angel Stadium! Angels one, Padres nothing, bottom of
+the second.
+```
+
+Five script lines covering what was one dramatic paragraph in the old prose version. Note the SFX break right after the call — that's where the crowd does the emotional lifting; the transcript acknowledges it explicitly.
 
 ---
 
@@ -43,40 +65,171 @@ Past tense is permissible only in (a) between-innings recaps of earlier innings,
 ### Source
 
 ```
-2. **Peraza** (vs. Waldron) — *Groundout.* Oswald Peraza grounds out, second baseman Jake Cronenworth to first baseman Ty France.
-    ↳ count 0-0, 1 pitch
-    ↳ Knuckle Ball 80.7 mph, 420 rpm · Batted: EV 65.6 mph, LA -42°, 3 ft, ground ball, to 2B
+idx=11 · inning=2 bottom · batter=Peraza · pitcher=Waldron · event=Groundout
+count 0-0 · 1 pitch · Knuckle Ball 80.7 mph
+(ground ball, 4-3)
 ```
 
-### Broadcast
+### Script
 
-> *Peraza up next. First-pitch knuckleball — and he chops it weakly to the second sacker. Cronenworth picks it up, easy toss to France, one away.*
+```
+**[00:22:04] HALLIDAY:** Oswald Peraza up. First-pitch knuckler —
+chopped weakly to the second sacker. Cronenworth picks it up, easy
+toss to France. One away.
+```
 
-One sentence. Don't stretch routine plays unless they open or close an inning.
+Single script line. Don't stretch routine plays unless they open or close an inning.
 
 ---
 
-## Example 3: A strikeout with a nasty pitch
+## Example 3: A nine-pitch strikeout
 
 ### Source
 
 ```
-7. **Trout** (vs. Waldron) — *Strikeout.* Mike Trout strikes out swinging.
-    ↳ count 2-3, 9 pitches
-    ↳ Four-Seam Fastball 93.4 mph, 1999 rpm
+idx=16 · inning=2 bottom · batter=Trout · pitcher=Waldron · event=Strikeout
+count 2-3 · 9 pitches · Four-Seam 93.4 mph, 1999 rpm (swinging K)
 ```
 
-### Broadcast
+### Script
 
-> *Now stepping to the dish — Mike Trout himself, the centerfielder. The Angels' captain, their pride and joy. Waldron gets the sign.*
->
-> *Here's the stretch — the pitch — ball one, outside. … Two-oh. The knuckler comes in, Trout lays off, ball three. Three-and-oh the count. Waldron has to come in with one — and he does — strike one, called! Three-and-one. Another knuckler — fouled back into the screen. Three-and-two, the payoff! Waldron takes his time. The sign. The stretch. And here's the two-three pitch —*
->
-> *Fastball! Trout swings — and he* misses! *Oh my, a nine-pitch at-bat, and Waldron strikes out Mike Trout! The crowd groans — but you have to give the pitcher credit, folks. He worked through Trout's strike zone and found the one he wanted. Inning over.*
+```
+**[00:26:18] HALLIDAY:** Now stepping to the dish — Mike Trout, the
+centerfielder, the Angels' captain. Bases empty, two away in the
+second.
 
-Notice: nine-pitch ABs deserve the full pitch-by-pitch treatment. Routine three-pitch punch-outs get one or two sentences.
+**[00:26:28] HALLIDAY:** Waldron gets the sign, the stretch —
+*ball one*, outside.
+
+**[00:26:36] HALLIDAY:** The knuckler comes in, Trout lays off —
+*ball two*. Two and oh.
+
+**[00:26:44] HALLIDAY:** Waldron has to come in with one — and he
+does — *strike one, called!* Two and one.
+
+**[00:26:54] HALLIDAY:** Another knuckler — fouled back into the
+screen. Two and two.
+
+**[00:27:04] HALLIDAY:** Full count to Trout, a payoff pitch
+coming. Waldron takes his time. The stretch. The pitch —
+
+**[00:27:13] HALLIDAY:** *Swung on and missed!* A nine-pitch at-bat
+and Waldron gets Mike Trout! The Padres' man earns his money on
+that one, folks — worked through Trout's strike zone and found the
+one he wanted.
+
+**[00:27:26] SFX:** *[SMATTERING OF APPLAUSE]*
+```
+
+Nine-pitch at-bats deserve pitch-by-pitch breakdown. Each pitch is its own short line so the rhythm matches the call.
 
 ---
+
+## Example 4: Inning-break transition
+
+### Between bottom-2nd Angels-at-bat and top-3rd Padres-at-bat
+
+```
+**[00:28:42] SFX:** *[CROWD — APPLAUSE AS ANGELS JOG OFF]*
+
+**[00:28:48] HALLIDAY:** End of two. Angels three, Padres nothing.
+We'll take a short break.
+
+**[00:29:02] COMMERCIAL:** *[SPONSOR SPOT — WHEATIES: THE BREAKFAST
+OF CHAMPIONS, 15 SECONDS]*
+
+**[00:29:17] MUSIC:** *ORGAN — FAST BRIDGE INTO THE THIRD.*
+
+---
+
+### ▲ TOP 3RD — PADRES BATTING · ANGELS PITCHING
+
+**[00:29:28] HALLIDAY:** And we're back at Angel Stadium, top of
+the third, Angels on top three to nothing. Nick Castellanos
+leading off for the Padres...
+```
+
+Notice how the inning boundary is a full **stage transition**: SFX closing the frame, announcer outro, commercial break (optional), musical bridge, new section header, new half-inning begins. The divider `---` + `### ▲ TOP 3RD — …` header visually anchors the shift.
+
+---
+
+## Example 5: SFX-only atmosphere during a quiet moment
+
+Between batters, between pitches, or during a pitching change, it's fine to have a SFX-only script line with no announcer immediately before or after:
+
+```
+**[01:02:14] SFX:** *[CROWD SETTLES — MURMUR]*
+
+**[01:02:19] SFX:** *[VENDOR CALL — "HOT DOGS! GET YOUR HOT DOGS!"]*
+
+**[01:02:24] HALLIDAY:** A cool April evening here at Angel
+Stadium, the lights taking hold as we move into the middle
+innings…
+```
+
+These are pure atmosphere — grounded in the real data (it *is* cool, it *is* April, the lights *are* coming on per the atmosphere block). No facts fabricated.
+
+---
+
+## Example 6: Pitching change
+
+### When `plays.csv` shows a pitcher change between rows
+
+```
+**[01:15:22] SFX:** *[MURMUR — BALL GOES TO THE MANAGER]*
+
+**[01:15:28] HALLIDAY:** Washington walking to the hill. Here comes
+the signal — and Jim Washington's going to make a change. Waldron
+is out. Three and two-thirds of work, eight hits, six earned runs
+— a tough night for the young knuckleballer.
+
+**[01:15:46] SFX:** *[POLITE APPLAUSE FOR WALDRON]*
+
+**[01:15:52] HALLIDAY:** Coming in from the bullpen — David Morgan.
+A right-hander, in his third season with the Padres. Let's see
+what he's got tonight.
+
+**[01:16:10] MUSIC:** *ORGAN — "HARD LUCK HARRY" SHORT BRIDGE.*
+```
+
+---
+
+## Example 7: The final out and sign-off
+
+```
+**[02:55:14] HALLIDAY:** Two away, ninth inning, Tatis Junior at
+the plate. Romano ready. The stretch. The pitch —
+
+**[02:55:22] HALLIDAY:** *Swung on and missed!* Strike three! That
+will do it, folks — the Angels shut out the Padres, eight to
+nothing, here at Angel Stadium!
+
+**[02:55:30] SFX:** *[GAME-ENDING CROWD ROAR — SUSTAINED]*
+
+**[02:55:50] HALLIDAY:** The winning pitcher: José Soriano, five
+and two-thirds of scoreless ball, eight strikeouts. The losing
+pitcher: Matt Waldron, just didn't have his best knuckler tonight.
+The star of the game — Nolan Schanuel, three hits in five trips.
+
+**[02:56:24] HALLIDAY:** From Angel Stadium on this fine April
+Friday, this is Howard "Hap" Halliday saying so long. Tomorrow's
+another ballgame. Good night, folks.
+
+**[02:57:50] MUSIC:** *PROGRAM CLOSE — ORGAN FANFARE.*
+
+**[02:58:00] STATION ID:** *[KFI LOS ANGELES — SIGN-OFF]*
+```
+
+---
+
+## Lessons from these examples
+
+1. **One beat per line.** A pitch, a reaction, an SFX, a crowd note — each is its own paragraph.
+2. **SFX is a line, not an aside.** Crowd noise, music, station idents all get their own `SFX:` / `MUSIC:` / `STATION ID:` line at the right timestamp.
+3. **Timestamps always lead.** Fixed-width `[HH:MM:SS]` format; approximate from play-index / duration ratio.
+4. **Labels always ALL CAPS + colon.** `HALLIDAY:`, `SFX:`, `MUSIC:`, `COMMERCIAL:`, `STATION ID:`.
+5. **Inning transitions are structural.** SFX close the previous frame, divider rule + header opens the next.
+6. **Facts stay gospel.** Every pitch, count, score, Statcast metric, player name ties to the CSV dataset. Atmosphere, crowd reaction, sponsor reads are the costume.
 
 ## Example 4: A double with a runner scoring
 

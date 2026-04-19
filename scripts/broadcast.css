@@ -1,38 +1,51 @@
-/* mlb-announcer-1930s — broadcast transcript stylesheet
-   Aesthetic: a Depression-era broadcast script. Slight paper aging,
-   Courier-style mono for the station idents, serif body for the spoken
-   portions. Narrow reading column, classic radio-script feel.
-*/
+/* mlb-announcer-1930s — radio broadcast transcript stylesheet
+ * ─────────────────────────────────────────────────────────────────
+ * Evokes a 1930s-era typewritten broadcast script. Monospace body,
+ * fixed-column speaker labels with hanging indent, paper-tone page,
+ * accented speaker/cue labels. The `<div class="radio-script">`
+ * wrapper emitted by the skill keys all the script-specific rules
+ * below. The `<div class="script-header">` wrapper is for the
+ * ASCII-framed title block at the top.
+ *
+ * Light / dark mode via `prefers-color-scheme`.
+ */
 
 :root {
-  --ink: #23201a;
+  --ink: #15110a;              /* darker ink — stronger contrast on sepia */
   --paper: #f4ead6;
   --paper-dark: #e8daba;
-  --accent: #6e2217;
+  --accent: #6e2217;           /* HALLIDAY / announcer color */
+  --player: #2a1508;           /* player-name highlight — darker + heavy */
+  --run: #7a1717;              /* scoring keyword accent */
+  --sfx-color: #5a2e1c;        /* SFX, MUSIC, STATION ID, COMMERCIAL */
   --rule: #8a7a5a;
   --muted: #6a5f44;
-  --mono: "Courier Prime", "IBM Plex Mono", "Courier New", monospace;
+  --mono: "Courier Prime", "IBM Plex Mono", "Courier New", Menlo, monospace;
   --serif: "Iowan Old Style", Georgia, "Times New Roman", serif;
 }
 
 html, body {
   background: var(--paper);
   color: var(--ink);
-  font-family: var(--serif);
-  font-size: 17px;
-  line-height: 1.6;
+  font-family: var(--mono);      /* typewriter body */
+  font-size: 15px;
+  font-weight: 500;              /* heavier dialogue — stands off the sepia */
+  line-height: 1.55;
 }
 
 body {
-  max-width: 40rem;
-  margin: 2.5rem auto 6rem;
-  padding: 2rem 2.2rem;
+  /* Default sized for phones / narrow viewports — letter-page feel.
+     On wider screens we bump the max-width via media query below so the
+     paper doesn't float in an ocean of empty space. */
+  max-width: 44rem;
+  margin: 1rem auto 2rem;
+  padding: 1rem 1.4rem;
   background:
     repeating-linear-gradient(
       0deg,
       rgba(0,0,0,0.00) 0px,
       rgba(0,0,0,0.00) 27px,
-      rgba(0,0,0,0.015) 28px
+      rgba(0,0,0,0.012) 28px
     ),
     var(--paper);
   box-shadow: 0 2px 20px rgba(0,0,0,0.08);
@@ -42,8 +55,8 @@ body {
 h1 {
   font-family: var(--mono);
   font-weight: 700;
-  font-size: 1.7rem;
-  letter-spacing: 0.1em;
+  font-size: 1.5rem;
+  letter-spacing: 0.18em;
   text-align: center;
   text-transform: uppercase;
   margin: 0 0 0.3em;
@@ -51,79 +64,204 @@ h1 {
   border-bottom: 2px solid var(--ink);
 }
 
-h2 {
+/* Title block ("PROGRAM:, DATE:, GAME:…" ASCII frame) */
+.script-header pre {
   font-family: var(--mono);
-  font-weight: 700;
-  font-size: 1rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  text-align: center;
-  margin: 2em 0 1em;
-  padding: 0.3em 0;
-  border-top: 1px solid var(--rule);
-  border-bottom: 1px solid var(--rule);
-  color: var(--accent);
+  font-size: 0.92em;
+  line-height: 1.5;
+  color: var(--ink);
+  background: var(--paper-dark);
+  padding: 1rem 1.4rem;
+  margin: 1.4em auto;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  white-space: pre;
+  overflow-x: auto;
+}
+/* If the title block isn't in a code fence, style the wrapper directly */
+.script-header {
+  font-family: var(--mono);
+  font-size: 0.92em;
+  background: var(--paper-dark);
+  border: 1px solid var(--rule);
+  padding: 1rem 1.4rem;
+  margin: 1.4em 0;
+  border-radius: 2px;
 }
 
+/* Inning-break section headers */
 h3 {
   font-family: var(--mono);
-  font-weight: 600;
-  font-size: 0.9rem;
-  letter-spacing: 0.1em;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--muted);
-  margin: 1.5em 0 0.6em;
-}
-
-/* Opening blockquote station-ident callouts */
-blockquote {
-  border-left: 3px double var(--accent);
-  background: var(--paper-dark);
-  padding: 0.8em 1em;
-  margin: 1.5em 0;
-  font-style: italic;
-  font-size: 0.98em;
-  color: var(--ink);
-}
-
-blockquote strong {
-  font-family: var(--mono);
-  font-style: normal;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: 0.88em;
   color: var(--accent);
+  margin: 2.2em 0 0.8em;
+  padding: 0.3em 0;
+  border-top: 1px solid var(--accent);
+  border-bottom: 1px solid var(--accent);
 }
 
-blockquote em {
+/* Horizontal rules separate inning/scene transitions */
+hr {
+  border: 0;
+  border-top: 1px dashed var(--rule);
+  margin: 2em 0 0.4em;
+}
+
+/* The script body — every paragraph is a script line */
+.radio-script {
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.6;
+  margin-top: 1.5em;
+}
+
+.radio-script p {
+  /* Fixed-column script-line layout: label lives in an absolutely-positioned
+     left column; content flows with a matching padding-left so text wraps
+     cleanly under itself. No text-indent = no risk of first-line overflow. */
+  position: relative;
+  margin: 0.9em 0;              /* generous vertical separation */
+  padding-left: 13.5rem;
   color: var(--ink);
+  text-align: left;
+  min-height: 1.55em;
 }
 
-/* Normal text */
-p {
-  text-indent: 1.2em;
-  margin: 0.4em 0;
+/* Label column — sized for the widest label (`[HH:MM:SS] STATION ID:` =
+   22 Courier chars). `white-space: nowrap` prevents wrap-into-two-lines
+   which was causing vertical overlap between adjacent paragraphs. */
+.radio-script p strong:first-child {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 13rem;
+  white-space: nowrap;
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  font-family: var(--mono);
 }
 
-p:first-of-type, h1 + p, h2 + p, h3 + p, blockquote + p {
-  text-indent: 0;
-}
-
-em {
+/* SFX / MUSIC / COMMERCIAL / STATION ID lines: subtler, italic content */
+.radio-script p em {
+  color: var(--sfx-color);
   font-style: italic;
 }
 
-strong {
+/* Player names — bold, slightly darker, small-caps for scannability */
+.radio-script .player {
+  font-weight: 700;
+  color: var(--player);
+  letter-spacing: 0.01em;
+}
+
+/* Scoring keywords (scores, home run, four-bagger, etc.) — subtle red accent */
+.radio-script .run {
+  color: var(--run);
   font-weight: 700;
 }
 
-/* Horizontal rule — broadcast-card feel */
-hr {
+/* Team-name color treatment — inline bold tint for each team playing.
+   Subtler than the game-log pill: no background, no border, just a
+   team-colored bold. All 30 team primaries as CSS vars so new games
+   pick up the right color without touching the stylesheet. */
+:root {
+  --t-ARI: #A71930; --t-AZ:  #A71930;
+  --t-ATL: #CE1141;
+  --t-BAL: #DF4601;
+  --t-BOS: #BD3039;
+  --t-CHC: #0E3386;
+  --t-CWS: #27251F;
+  --t-CIN: #C6011F;
+  --t-CLE: #00385D;
+  --t-COL: #333366;
+  --t-DET: #0C2340;
+  --t-HOU: #EB6E1F;
+  --t-KC:  #004687;
+  --t-LAA: #BA0021;
+  --t-LAD: #005A9C;
+  --t-MIA: #00A3E0;
+  --t-MIL: #12284B;
+  --t-MIN: #002B5C;
+  --t-NYM: #FF5910;
+  --t-NYY: #0C2340;
+  --t-OAK: #003831; --t-ATH: #003831;
+  --t-PHI: #E81828;
+  --t-PIT: #FDB827;
+  --t-SD:  #2F241D;
+  --t-SF:  #FD5A1E;
+  --t-SEA: #0C2C56;
+  --t-STL: #C41E3A;
+  --t-TB:  #092C5C;
+  --t-TEX: #003278;
+  --t-TOR: #134A8E;
+  --t-WSH: #AB0003;
+}
+
+.radio-script .team-name {
+  font-weight: 700;
+  color: var(--team-color, inherit);
+}
+.radio-script .team-name.t-ARI, .radio-script .team-name.t-AZ { --team-color: var(--t-ARI); }
+.radio-script .team-name.t-ATL { --team-color: var(--t-ATL); }
+.radio-script .team-name.t-BAL { --team-color: var(--t-BAL); }
+.radio-script .team-name.t-BOS { --team-color: var(--t-BOS); }
+.radio-script .team-name.t-CHC { --team-color: var(--t-CHC); }
+.radio-script .team-name.t-CWS { --team-color: var(--t-CWS); }
+.radio-script .team-name.t-CIN { --team-color: var(--t-CIN); }
+.radio-script .team-name.t-CLE { --team-color: var(--t-CLE); }
+.radio-script .team-name.t-COL { --team-color: var(--t-COL); }
+.radio-script .team-name.t-DET { --team-color: var(--t-DET); }
+.radio-script .team-name.t-HOU { --team-color: var(--t-HOU); }
+.radio-script .team-name.t-KC  { --team-color: var(--t-KC); }
+.radio-script .team-name.t-LAA { --team-color: var(--t-LAA); }
+.radio-script .team-name.t-LAD { --team-color: var(--t-LAD); }
+.radio-script .team-name.t-MIA { --team-color: var(--t-MIA); }
+.radio-script .team-name.t-MIL { --team-color: var(--t-MIL); }
+.radio-script .team-name.t-MIN { --team-color: var(--t-MIN); }
+.radio-script .team-name.t-NYM { --team-color: var(--t-NYM); }
+.radio-script .team-name.t-NYY { --team-color: var(--t-NYY); }
+.radio-script .team-name.t-OAK, .radio-script .team-name.t-ATH { --team-color: var(--t-OAK); }
+.radio-script .team-name.t-PHI { --team-color: var(--t-PHI); }
+.radio-script .team-name.t-PIT { --team-color: var(--t-PIT); }
+.radio-script .team-name.t-SD  { --team-color: var(--t-SD); }
+.radio-script .team-name.t-SF  { --team-color: var(--t-SF); }
+.radio-script .team-name.t-SEA { --team-color: var(--t-SEA); }
+.radio-script .team-name.t-STL { --team-color: var(--t-STL); }
+.radio-script .team-name.t-TB  { --team-color: var(--t-TB); }
+.radio-script .team-name.t-TEX { --team-color: var(--t-TEX); }
+.radio-script .team-name.t-TOR { --team-color: var(--t-TOR); }
+.radio-script .team-name.t-WSH { --team-color: var(--t-WSH); }
+
+@media (prefers-color-scheme: dark) {
+  /* Brighten the very-dark team colors so they read on dark paper */
+  .radio-script .team-name.t-SD  { --team-color: #8b6f47; }
+  .radio-script .team-name.t-CWS { --team-color: #888888; }
+  .radio-script .team-name.t-OAK, .radio-script .team-name.t-ATH { --team-color: #27a07c; }
+  .radio-script .team-name.t-DET { --team-color: #4470b0; }
+  .radio-script .team-name.t-NYY { --team-color: #4470b0; }
+  .radio-script .team-name.t-SEA { --team-color: #4470b0; }
+  .radio-script .team-name.t-TB  { --team-color: #4470b0; }
+}
+
+/* Label-specific accents for non-announcer cues.
+   We can't attribute-select on strong content in CSS 3, but the italic +
+   bracketed convention inside the content already visually separates them.
+   If the Markdown includes the label name in the bold prefix, the accent
+   above already covers it. */
+
+/* End-of-transcript decorative divider (the final <hr>) */
+.radio-script + hr,
+body > hr:last-of-type {
   border: 0;
   text-align: center;
-  margin: 2.5em 0;
+  margin: 2.5em 0 1em;
 }
-hr::before {
+.radio-script + hr::before,
+body > hr:last-of-type::before {
   content: "— END OF TRANSCRIPT —";
   font-family: var(--mono);
   font-size: 0.8em;
@@ -131,7 +269,7 @@ hr::before {
   color: var(--muted);
 }
 
-/* Footer */
+/* Small-print footer (source citation, etc.) */
 body > p:last-of-type em {
   color: var(--muted);
   font-size: 0.85em;
@@ -150,6 +288,17 @@ a:hover {
   border-bottom-color: var(--accent);
 }
 
+/* Attended-banner blockquote, if present above the script body */
+blockquote {
+  border-left: 3px double var(--accent);
+  background: var(--paper-dark);
+  padding: 0.8em 1em;
+  margin: 1.2em 0;
+  font-style: italic;
+  font-size: 0.95em;
+  color: var(--ink);
+}
+
 /* Print */
 @media print {
   body {
@@ -159,7 +308,149 @@ a:hover {
     background: white;
     box-shadow: none;
   }
-  h1 { font-size: 18pt; }
-  h2 { font-size: 11pt; }
+  .radio-script p {
+    padding-left: 13rem;
+    text-indent: -13rem;
+    page-break-inside: avoid;
+  }
+  .radio-script p strong:first-child {
+    min-width: 12rem;
+  }
+  h1 { font-size: 16pt; }
+  h3 { font-size: 10pt; }
   a { color: inherit; }
+}
+
+/* Narrow screens: drop the hanging indent, let script lines flow top-down */
+@media (max-width: 48rem) {
+  .radio-script p {
+    padding-left: 0;
+    text-indent: 0;
+  }
+  .radio-script p strong:first-child {
+    display: block;
+    min-width: 0;
+    margin-bottom: 0.15em;
+  }
+}
+
+/* Wide viewports — let the paper grow so the content column gets
+   readable width, but cap at a reasonable letter-and-a-half feel. */
+@media (min-width: 80rem) {
+  body {
+    max-width: 62rem;
+    padding: 1.2rem 2rem;
+  }
+}
+@media (min-width: 110rem) {
+  body {
+    max-width: 72rem;
+  }
+}
+
+/* Dark mode — warm charcoal paper tone, lighter ink, script still typewritten */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #e8e2d0;
+    --paper: #1a160f;
+    --paper-dark: #241d12;
+    --accent: #d95444;
+    --sfx-color: #b77a55;
+    --rule: #4a4132;
+    --muted: #8a7e62;
+  }
+  body { -webkit-font-smoothing: antialiased; }
+  blockquote { background: rgba(122, 23, 23, 0.14); }
+  .script-header { background: var(--paper-dark); }
+  .script-header pre { background: var(--paper-dark); color: var(--ink); }
+}
+
+/* ---------------------------------------------------------------------------
+ * Site nav — old-time-radio / Art Deco flavor
+ * Warm brass-and-tube-glow banner, Courier Prime small caps, thin decorative
+ * double rule below. Matches the sepia/typewriter aesthetic of the script.
+ * nav.js on the hosted site injects <nav class="site-nav"> as the first
+ * body child; styling here mirrors the mlb-game-report nav but with a
+ * broadcast palette and type treatment.
+ * --------------------------------------------------------------------------- */
+nav.site-nav {
+  background:
+    linear-gradient(180deg, #5a3a1a 0%, #3d2610 72%, #2c1a08 100%);
+  color: #f3dfa8;
+  margin: -1rem -1.4rem 1.5rem;
+  padding: 0.6rem 1.2rem 0.5rem;
+  border-bottom: 3px double #b8883a;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(255, 206, 120, 0.2);
+  font-family: "Courier Prime", "Courier New", Courier, monospace;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+nav.site-nav .site-nav-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1.2rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+nav.site-nav a {
+  color: #f3dfa8;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+nav.site-nav .site-nav-brand {
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  opacity: 0.95;
+}
+nav.site-nav .site-nav-brand::before {
+  content: "🎙 ";
+  margin-right: 0.15em;
+  filter: sepia(0.3);
+}
+nav.site-nav .site-nav-brand:hover { opacity: 1; }
+nav.site-nav ul.site-nav-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 1.2rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+nav.site-nav ul.site-nav-links li { margin: 0; }
+nav.site-nav ul.site-nav-links a {
+  padding: 0.1rem 0;
+  opacity: 0.82;
+}
+nav.site-nav ul.site-nav-links a:hover {
+  opacity: 1;
+  border-bottom-color: #d9a24a;
+}
+nav.site-nav ul.site-nav-links a[aria-current="page"] {
+  opacity: 1;
+  color: #ffe29a;
+  border-bottom-color: #ffe29a;
+  font-weight: 700;
+}
+
+@media (max-width: 36rem) {
+  nav.site-nav { margin: -1rem -1rem 1rem; padding: 0.5rem 0.8rem 0.45rem; }
+  nav.site-nav .site-nav-brand { font-size: 0.78rem; letter-spacing: 0.16em; }
+  nav.site-nav ul.site-nav-links { gap: 0.8rem; font-size: 0.72rem; letter-spacing: 0.1em; }
+}
+
+/* Dark mode — ease the brass so it doesn't glow against the charcoal paper */
+@media (prefers-color-scheme: dark) {
+  nav.site-nav {
+    background: linear-gradient(180deg, #4a2f15 0%, #2d1b0a 100%);
+    border-bottom-color: #8a6628;
+  }
+  nav.site-nav a { color: #e8d4a0; }
+  nav.site-nav ul.site-nav-links a[aria-current="page"] {
+    color: #ffe29a;
+    border-bottom-color: #ffe29a;
+  }
 }
