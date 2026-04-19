@@ -44,6 +44,16 @@ h = re.sub(r"<style>.*?</style>", "", h, count=1, flags=re.DOTALL)
 h = re.sub(r'<h1 class="title">[^<]*</h1>\s*', "", h, count=1)
 h = re.sub(r'<header id="title-block-header">\s*</header>\s*', "", h, count=1)
 h = h.replace("</head>", f'<style>\n{css}\n</style>\n<script src="/nav.js" defer></script>\n</head>', 1)
+# Inject an "Also at:" refs bar linking to the .md source and the game log,
+# placed right after the title-block div — mirrors the newspaper game-report shape.
+slug = "${slug}"
+refs = (
+    '<p class="external-refs">Also at: '
+    f'<a href="{slug}.html" title="Game log (newspaper)">📰 game log</a> · '
+    f'<a href="{slug}-broadcast.md" title="Markdown source of this broadcast">📄 .md</a>'
+    '</p>'
+)
+h = re.sub(r'(</div>\s*)(<div class="radio-script">)', r'\1' + refs + r'\2', h, count=1)
 p.write_text(h)
 PY
 
