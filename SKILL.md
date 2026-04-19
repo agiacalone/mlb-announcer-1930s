@@ -52,6 +52,19 @@ Baseball radio broadcasting did not meaningfully exist before August 1921 (KDKA'
 - **Closing sign-off:** past tense is fine for the game-wide summary.
 - **Atmospheric color:** present tense. "The sun *is just slipping* behind the grandstand" — not "the sun slipped". "The flags *hang* limp" — not "hung limp".
 
+## Preferred workflow (as of v1.1): scaffold-first
+
+The skill is now part of a **four-stage pipeline**. Three stages are mechanical scripts; this skill owns the one non-mechanical stage (voice).
+
+1. **Scaffold** — `scripts/scaffold-broadcast.py <dataset>` produces a factual `.md` trellis with every inning divider, pitching change, and per-play HALLIDAY stub already placed (real timestamps from `plays.csv.start_time_utc`, real counts, real events). Every line needing voice is marked `<ENRICH: hint>` or `<ENRICH>`.
+2. **Enrich** — *this skill*. Open the scaffold, rewrite each `<ENRICH>` marker into 1930s radio voice per the style guide and references. Keep the factual spine (batter/pitcher/count/event) intact; replace the stub sentence with live present-tense color. Remove `<ENRICH: …>` placeholders as you go.
+3. **Tag** — `scripts/tag-broadcast.py <dataset> <md>` injects `<span class="player">`, `<span class="team-name">`, `<span class="run">` and `<span class="sb-tag">` pills linking each play back to the game-log anchor.
+4. **Render** — `scripts/render-broadcast <dataset>` runs tagging → pandoc → CSS/nav inject in one shot, producing the final `.html`.
+
+**Why scaffold-first:** facts-gospel becomes automatic (timestamps, batter order, counts, pitching changes come from CSV), so the announcer can't accidentally flip a score or miscount strikes. The voice-writing shrinks to "make each stub sound like 1936 radio" on a trellis that's already structurally correct.
+
+**If no scaffold exists**, fall back to writing the whole .md from scratch following the rest of this document. The scaffold is preferred but not required.
+
 ## When to use
 
 Triggers:

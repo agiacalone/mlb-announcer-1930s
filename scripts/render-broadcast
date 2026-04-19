@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+# Tag + render a broadcast .md → .html in one shot.
+# Usage: render-broadcast <dataset-dir> [--no-tag]
+#
+# Expects <dataset-dir>/../<dataset-name>-broadcast.md to already exist
+# (hand-written by the skill). This script:
+#   1. Runs tag-broadcast.py to inject player/team spans, run-spans, and
+#      sb-tag pills linking every PA back to the game-log anchor.
+#   2. Runs pandoc with the standard announcer flags.
+#   3. Strips pandoc's default <style>, inlines scripts/broadcast.css, and
+#      injects <script src="/nav.js" defer></script> for the site nav.
+
+set -eu
+here="$(cd "$(dirname "$0")" && pwd)"
+ds="${1:?dataset dir required}"
+mode="${2:-}"
+
+ds="${ds%/}"
+slug="$(basename "$ds")"
+parent="$(dirname "$ds")"
+md="$parent/${slug}-broadcast.md"
+html="$parent/${slug}-broadcast.html"
+
+if [[ ! -f "$md" ]]; then
+  echo "error: $md not found — write the broadcast .md first" >&2
+  exit 1
+fi
+
+if [[ "$mode" != "--no-tag" ]]; then
+  python3 "$here/tag-broadcast.py" "$ds" "$md"
+fi
+
+pandoc --from=gfm+yaml_metadata_block+smart --to=html5 --standalone \
+       --wrap=preserve -V document-css=false \
+       --metadata title=" " --metadata lang=en \
+       "$md" -o "$html"
+
+python3 - <<PY
+import re, pathlib
+css = pathlib.Path("$here/broadcast.css").read_text()
+p = pathlib.Path("$html")
+h = p.read_text()
+h = re.sub(r"<style>.*?</style>", "", h, count=1, flags=re.DOTALL)
+h = re.sub(r'<h1 class="title">[^<]*</h1>\s*', "", h, count=1)
+h = re.sub(r'<header id="title-block-header">\s*</header>\s*', "", h, count=1)
+h = h.replace("</head>", f'<style>\n{css}\n</style>\n<script src="/nav.js" defer></script>\n</head>', 1)
+p.write_text(h)
+PY
+
+echo "rendered $html"
