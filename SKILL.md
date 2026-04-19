@@ -65,6 +65,38 @@ The skill is now part of a **four-stage pipeline**. Three stages are mechanical 
 
 **If no scaffold exists**, fall back to writing the whole .md from scratch following the rest of this document. The scaffold is preferred but not required.
 
+## Voice-depth rubric (hard requirements)
+
+A broadcast is not done when every play has a line. It's done when every line *sounds like 1930s radio*. Before handing off, verify:
+
+**Length.** A 9-inning game produces **2,500–4,000 words** of enriched narrative. Extra innings add ~300 words per frame. Anything under 2,000 is a scaffold, not a broadcast.
+
+**Per half-inning.** Every half-inning has at least:
+- **One sensory line** — crowd reaction, weather beat, umpire call, vendor cry, flag movement, sunlight shift, or a groundskeeper note. Not every paragraph — at least one somewhere in the half.
+- **Descriptive action on each PA**, not just the event. "Moore lines a single into left, Powell plays it on a hop" beats "Moore singles." A fly ball names the fielder's route; a strikeout names the pitch type; a walk names the count shape.
+
+**Big moments.** Any play flagged as `is_scoring_play` or with high `captivating_index`, or any HR, gets a **three-line dramatic hold**:
+1. Setup line (batter, situation, pitcher check)
+2. The swing-and-ball-flight line (italics on the verb: *"HIGH DRIVE, DEEP TO RIGHT!"*)
+3. The reaction line (crowd SFX or HALLIDAY follow-up with the score recited)
+
+For the play marked `captivating_play_idx` in `game.csv`, stretch to four lines and add a SFX break.
+
+**Opening and closing.** Each gets **5–10 script lines**:
+- Opening: MUSIC → STATION ID → greeting with venue + weather + crowd size → storyline/context → pitchers-on-the-hill → lineups → SFX → national anthem MUSIC → PLAY BALL → "we are underway" handoff.
+- Closing: final-out call → SFX → final-score recap → decisions (W/L/SV) → batting stars → series/season context → sign-off → MUSIC → STATION ID.
+
+**Verb variety across a series.** Don't reuse the same home-run call or the same ball-flight metaphor twice in a single broadcast. Rotate: "a drive!" / "there she goes!" / "off the bat like a cannon!" / "over the wall!" / "into the bleachers!" / "goodbye, baseball!" (anachronistic if pre-1947; use "that ball is gone!" / "a tremendous wallop!").
+
+**Red flags that you're under-writing.**
+- Same verb twice in one half ("a fly to X", "a fly to Y", "a fly to Z"). Vary: fly, lift, drift, loft, chase, drop, pop.
+- "out" or "grounds out" as the entire action. What kind of grounder? Who fielded? What happened?
+- No crowd/weather reference for an entire middle inning.
+- The MOMENT OF THE GAME rendered in fewer than 3 script lines.
+- A closing under 200 words.
+
+If any of the above apply, you haven't finished — go back and enrich.
+
 ## When to use
 
 Triggers:
