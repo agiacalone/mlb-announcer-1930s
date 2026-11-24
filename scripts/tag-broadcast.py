@@ -39,6 +39,10 @@ for p in batting + pitching:
 TAG_CLASS = {"HR":"hr","3B":"hit","2B":"hit","1B":"hit","K":"k","ꓘ":"k",
              "BB":"walk","IBB":"walk","HBP":"walk","SH":"sac","SF":"sac",
              "GIDP":"dp","DP":"dp","TP":"dp","WP":"err","PB":"err","BK":"err",
+             # Every other code mlb-game-report's EVENT_TAG can write
+             # (_shared.py), so no play goes without a pill.
+             "E":"err","CI":"err","BI":"out","FI":"hit",
+             "K-DP":"dp","SF-DP":"dp","SH-DP":"dp",
              "SB":"hit","CS":"out",
              # Out-type tags — visually "out" flavor.
              "FO":"out","GO":"out","LO":"out","PO":"out","FC":"out"}
