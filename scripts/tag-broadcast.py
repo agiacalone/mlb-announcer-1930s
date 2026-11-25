@@ -43,7 +43,7 @@ TAG_CLASS = {"HR":"hr","3B":"hit","2B":"hit","1B":"hit","K":"k","ꓘ":"k",
              # (_shared.py), so no play goes without a pill.
              "E":"err","CI":"err","BI":"out","FI":"hit",
              "K-DP":"dp","SF-DP":"dp","SH-DP":"dp",
-             "SB":"hit","CS":"out",
+             "SB":"hit","CS":"out","PK":"out",
              # Out-type tags — visually "out" flavor.
              "FO":"out","GO":"out","LO":"out","PO":"out","FC":"out"}
 def pill(idx, letter, klass):
